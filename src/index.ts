@@ -6,7 +6,8 @@ const client = new SapphireClient({
 		level: LogLevel.Debug
 	},
 	shards: 'auto',
-	intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS']
+	intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS'],
+	partials: ['MESSAGE', 'REACTION']
 });
 
 const main = async () => {
