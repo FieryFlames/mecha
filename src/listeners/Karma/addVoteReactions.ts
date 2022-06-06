@@ -10,10 +10,10 @@ export class addVoteReactionsListener extends Listener {
 	}
 
 	public async run(message: Message) {
-		if (message.author.bot) return
-		else if (message.channel.id != process.env.KARMA_CHANNEL_ID) return
+		if (message.author.bot) return;
+		else if (message.channel.id != process.env.KARMA_CHANNEL_ID) return;
 
-		await message.react('⬆️')
-		await message.react('⬇️')
+		await message.react('⬆️');
+		await message.react('⬇️');
 	}
 }
