@@ -6,5 +6,5 @@ export const Karma = sequelize.define('Karma', {
 		type: DataTypes.STRING,
 		primaryKey: true
 	},
-	karma: DataTypes.NUMBER
+	karma: DataTypes.INTEGER
 });
