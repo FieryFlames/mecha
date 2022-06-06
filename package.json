@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "author": "FieryFlames",
-  "license": "UNLICENSE",
+  "license": "MIT",
   "dependencies": {
     "@discordjs/collection": "^0.4.0",
     "@sapphire/decorators": "^4.0.2",
