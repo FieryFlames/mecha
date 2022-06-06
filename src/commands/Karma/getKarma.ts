@@ -8,9 +8,9 @@ import { Karma } from '../../lib/models/Karma';
 })
 export class PingCommand extends Command {
 	public async contextMenuRun(interaction: Command.ContextMenuInteraction) {
-		const user = interaction.options.getUser('user', true)
+		const user = interaction.options.getUser('user', true);
 
-		const userKarma = await Karma.findOne({ where: { user_id: user.id } }) || { karma: 0 }
+		const userKarma = (await Karma.findOne({ where: { user_id: user.id } })) || { karma: 0 };
 
 		// @ts-expect-error
 		await interaction.reply({ content: `${user.toString()} has ${userKarma.karma} karma.`, ephemeral: true });
