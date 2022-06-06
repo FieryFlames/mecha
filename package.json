@@ -17,6 +17,8 @@
     "discord.js": "^13.6.0",
     "dotenv-cra": "^3.0.2",
     "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.20.1",
+    "sqlite3": "^5.0.8",
     "tslib": "^2.4.0"
   },
   "devDependencies": {

@@ -8,6 +8,8 @@ import { config } from 'dotenv-cra';
 import { join } from 'path';
 import { inspect } from 'util';
 import { srcDir } from './constants';
+// @ts-expect-error
+import { Karma } from './models/Karma';
 
 // Read env var
 config({ path: join(srcDir, '.env') });
