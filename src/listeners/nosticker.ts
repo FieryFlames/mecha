@@ -16,9 +16,9 @@ export class NoStickerListener extends Listener {
 			if (message.stickers.first()) {
 				if (message.deletable) {
 					await message.delete();
-					this.container.logger.debug(`NoStickerListener: Deleted message ${message.id}.`);
+					this.container.logger.info(`NoStickerListener: Deleted message ${message.id}.`);
 				} else {
-					this.container.logger.debug(`NoStickerListener: Message ${message.id} is not deletable.`);
+					this.container.logger.warn(`NoStickerListener: Message ${message.id} is not deletable.`);
 				}
 			}
 		}
