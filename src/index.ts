@@ -3,7 +3,7 @@ import { LogLevel, SapphireClient } from '@sapphire/framework';
 
 const client = new SapphireClient({
 	logger: {
-		level: LogLevel.Debug
+		level: process.env.NODE_ENV === 'development' ? LogLevel.Debug : LogLevel.Info
 	},
 	shards: 'auto',
 	intents: [
