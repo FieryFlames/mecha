@@ -15,8 +15,12 @@ export class NoStickerListener extends Listener {
 		if (message.member?.roles.cache.some((role) => role.name === 'nosticker')) {
 			if (message.stickers.first()) {
 				if (message.deletable) {
-					await message.delete();
-					this.container.logger.info(`NoStickerListener: Deleted message ${message.id}.`);
+					try {
+						await message.delete();
+						this.container.logger.info(`NoStickerListener: Deleted message ${message.id}.`);
+					} catch (error) {
+						this.container.logger.error(`NoStickerListener: ${error} occured when deleting message ${message.id}`);
+					}
 				} else {
 					this.container.logger.warn(`NoStickerListener: Message ${message.id} is not deletable.`);
 				}
