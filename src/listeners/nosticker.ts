@@ -12,7 +12,7 @@ export class NoStickerListener extends Listener {
 	public async run(message: Message) {
 		if (message.author.bot) return;
 
-		if (message.member?.roles.cache.some((role) => role.name === 'nosticker')) {
+		if (message.member?.roles.cache.some((role) => role.name === 'No Stickers')) {
 			if (message.stickers.first()) {
 				if (message.deletable) {
 					try {
