@@ -1,4 +1,5 @@
 import { Command, RegisterBehavior } from '@sapphire/framework';
+import moment from 'moment';
 import parse from 'parse-duration';
 
 export class GreyCommand extends Command {
@@ -46,7 +47,7 @@ export class GreyCommand extends Command {
 					return interaction.reply({ content: `${target} is now a grey <:grey:988241434979225610>`, ephemeral: slient });
 				} else {
 					await interaction.reply({
-						content: `${target} is temporarily a grey for ${duration / 60000} minutes <:grey:988241434979225610>`,
+						content: `${target} is temporarily a grey for ${moment().add(duration, 'ms').fromNow(true)} <:grey:988241434979225610>`,
 						ephemeral: slient
 					});
 
