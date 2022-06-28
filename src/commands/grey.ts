@@ -1,4 +1,5 @@
-import { Command } from '@sapphire/framework';
+import { Command, RegisterBehavior } from '@sapphire/framework';
+import parse from 'parse-duration';
 
 export class GreyCommand extends Command {
 	public constructor(context: Command.Context, options: Command.Options) {
@@ -13,17 +14,21 @@ export class GreyCommand extends Command {
 	}
 
 	public override registerApplicationCommands(registry: Command.Registry) {
-		registry.registerChatInputCommand((builder) =>
-			builder
-				.setName('grey')
-				.setDescription('Turn someone into a grey and vice versa')
-				.addUserOption((option) => option.setName('member').setDescription('Who to grey').setRequired(true))
-				.addBooleanOption((option) => option.setName('silent').setDescription('Should the grey notification message be public'))
+		registry.registerChatInputCommand(
+			(builder) =>
+				builder
+					.setName('grey')
+					.setDescription('Turn someone into a grey and vice versa')
+					.addUserOption((option) => option.setName('member').setDescription('Who to grey').setRequired(true))
+					.addStringOption((option) => option.setName('duration').setDescription('How long to make them grey'))
+					.addBooleanOption((option) => option.setName('silent').setDescription('Should the grey notification message be public')),
+			{ behaviorWhenNotIdentical: RegisterBehavior.Overwrite }
 		);
 	}
 
 	public async chatInputRun(interaction: Command.ChatInputInteraction) {
 		const target = interaction.guild?.members.cache.find((member) => member.id === interaction.options.getUser('member', true).id);
+		const duration = parse(interaction.options.getString('duration') ?? '0s');
 		const slient = interaction.options.getBoolean('silent') ?? false;
 		const grey = interaction.guild?.roles.cache.find((role) => role.name === "I'm new here, say hi!");
 
@@ -37,7 +42,20 @@ export class GreyCommand extends Command {
 
 				this.container.logger.info(`GreyCommand: Turned ${target?.id} into a grey.`);
 
-				return interaction.reply({ content: `${target} is now a grey <:grey:988241434979225610>`, ephemeral: slient });
+				if (!duration) {
+					return interaction.reply({ content: `${target} is now a grey <:grey:988241434979225610>`, ephemeral: slient });
+				} else {
+					await interaction.reply({
+						content: `${target} is temporarily a grey for ${duration / 60000} minutes <:grey:988241434979225610>`,
+						ephemeral: slient
+					});
+
+					await new Promise((resolve) => setTimeout(resolve, duration));
+
+					await target?.roles.remove(grey);
+
+					this.container.logger.info(`GreyCommand: ${target?.id} is no longer grey.`);
+				}
 			} catch {
 				return interaction.reply({ content: 'Something went wrong...', ephemeral: slient });
 			}

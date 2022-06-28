@@ -20,6 +20,7 @@ specifiers:
   discord.js: ^13.6.0
   dotenv-cra: ^3.0.2
   npm-run-all: ^4.1.5
+  parse-duration: ^1.0.2
   prettier: ^2.5.1
   reflect-metadata: ^0.1.13
   tsc-watch: ^4.6.0
@@ -41,6 +42,7 @@ dependencies:
   discord-api-types: 0.34.0
   discord.js: 13.8.0
   dotenv-cra: 3.0.2
+  parse-duration: 1.0.2
   reflect-metadata: 0.1.13
   tslib: 2.4.0
 
@@ -983,6 +985,10 @@ packages:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
     dependencies:
       wrappy: 1.0.2
+    dev: false
+
+  /parse-duration/1.0.2:
+    resolution: {integrity: sha512-Dg27N6mfok+ow1a2rj/nRjtCfaKrHUZV2SJpEn/s8GaVUSlf4GGRCRP1c13Hj+wfPKVMrFDqLMLITkYKgKxyyg==}
     dev: false
 
   /parse-json/4.0.0:
